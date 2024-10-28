@@ -1,0 +1,13 @@
+package Runners;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features = "src/test/resources/countries.feature",
+        glue = "StepDefinitions",
+        publish = true)
+public class CountriesTest {
+}
+
