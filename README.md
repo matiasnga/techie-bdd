@@ -38,7 +38,7 @@ curl --location 'https://restcountries.com/v3.1/translation/argentina?fields=cap
 - Agregar la verificacion de la población (45.376.763)
 - Agregar un nuevo escenario con otro país a elección y verificar capital, colores de la bandera, dominio de internet y
   población.
-- Generar un reporte autmatico del set de pruebas.
+- Generar un reporte del set de pruebas.
 
 ***
 ## Dependencias
