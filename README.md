@@ -1,4 +1,4 @@
-# Techie BDD (Behaviour Driven Development)
+# Techie BDD (Behaviour-Driven Development)
 
 En la Ingeniería de Software, Behavior-Driven Development (BDD) o Desarrollo Basado en Comportamiento es una
 práctica ágil de desarrollo de software que se centra en la colaboración entre desarrolladores, testers y partes
