@@ -34,7 +34,8 @@ curl --location 'https://restcountries.com/v3.1/name/Argentina'
 
 ## Practica
 - Agregar la verificación del dominio de internet del exemplo dado (.ar) 
-- Agregar un caso con un nuevo pais y verificar capital, colores de la bandera y dominio de internet.
+- Agregar la verificacion de la poblacion (45.376.763)
+- Agregar un caso con un nuevo pais y verificar capital, colores de la bandera, dominio de internet y poblacion.
 
 ## Dependencias
 
