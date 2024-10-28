@@ -12,7 +12,7 @@ import org.junit.Assert;
 import java.util.List;
 
 public class RestCountries {
-    private static final String uri = "https://restcountries.com/v3.1/translation/";
+    private static final String uri = "https://restcountries.com/v3.1/name/";
     private static final String fields = "?fields=capital,flags,tld,population";
     private static final CountryDto countryDto = new CountryDto();
     private static Response response;
