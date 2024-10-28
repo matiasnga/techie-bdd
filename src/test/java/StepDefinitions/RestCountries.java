@@ -56,13 +56,11 @@ public class RestCountries {
     @And("el dominio de internet debe ser {string}")
     public void elDominioDeInternetDebeSer(String dominio) {
         Assert.assertEquals(dominio, countryDto.getDomain());
-
     }
 
     @And("la población debe ser {int}")
     public void laPoblacionDebeSer(Integer population) {
         Assert.assertEquals(population, countryDto.getPopulation());
-
     }
 
     //agregar métodos de verificación acá
