@@ -10,6 +10,7 @@ ayuda a reducir malentendidos y mejorar la calidad del software.
 
 Cucumber es una herramienta de automatización de pruebas que facilita el Desarrollo Basado en Comportamiento (BDD)
 mediante el uso del lenguaje Gherkin, que permite escribir pruebas en un formato legible para humanos.
+
 ### Ejemplo de Gherkin:
 ```
 Característica: Login de usuario
@@ -29,21 +30,18 @@ En Gherkin, la estructura típica de los pasos utiliza las palabras clave en ing
 https://restcountries.com/#endpoints-all
 
 ```bash
-curl --location 'https://restcountries.com/v3.1/name/Argentina'
+curl --location 'https://restcountries.com/v3.1/translation/Argentina'
 ```
 
 ## Práctica
-- Agregar la verificación del dominio de internet del exemplo dado (.ar) 
-- Agregar la verificacion de la poblacion (45.376.763)
-- Agregar un caso con un nuevo pais y verificar capital, colores de la bandera, dominio de internet y poblacion.
+- Agregar la verificación del dominio de internet del ejemplo dado (.ar) 
+- Agregar la verificacion de la población (45.376.763)
+- Agregar un nuevo escenario con un otro país a elección y verificar capital, colores de la bandera, dominio de internet y población.
 
 ## Dependencias
-
-- Java 11
-- junit
+- java 11
 - rest-assured
 - cucumber-java
 - cucumber-jvm-deps
 - cucumber-junit
-- cucumber-reporting
 - lombok
