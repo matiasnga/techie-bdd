@@ -11,6 +11,7 @@ import Dto.CountryDto;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class RestCountries {
     private static final String uri = "https://restcountries.com/v3.1/name/";
@@ -23,7 +24,6 @@ public class RestCountries {
         RestAssured.baseURI = uri;
         RequestSpecification request = RestAssured.given();
         response = request.get(country + fields);
-        System.out.println(response.getBody().asString());
     }
 
     @When("obtengo los datos del país")
@@ -36,7 +36,6 @@ public class RestCountries {
         countryDto.setFlagDescription(flagDescription);
         countryDto.setDomain(dominio.get(0));
         countryDto.setPopulation(population);
-        System.out.println(countryDto);
     }
 
     @Then("la capital debe ser {string}")
@@ -48,11 +47,11 @@ public class RestCountries {
     public void verificarBandera(String colores) {
         String[] coloresList = colores.toLowerCase().split(",\\s*");
         for (String color : coloresList) {
+            String regex = "\\b" + color + "\\b"; // \\b es un delimitador de palabra
             Assert.assertTrue("El color \"" + color + "\" no se encuentra en la descripción de la bandera.",
-                    countryDto.getFlagDescription().contains(color.toLowerCase()));
+                    Pattern.compile(regex).matcher(countryDto.getFlagDescription()).find());
         }
     }
-
     @And("el dominio de internet debe ser {string}")
     public void elDominioDeInternetDebeSer(String dominio) {
         Assert.assertEquals(dominio, countryDto.getDomain());
