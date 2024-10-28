@@ -24,18 +24,20 @@ En Gherkin, la estructura típica de los pasos utiliza las palabras clave en ing
 - Entonces (Then): Establece las expectativas o resultados que deberían suceder después de la acción.
 ***
 
-## Práctica
-- Agregar la verificación del dominio de internet del ejemplo dado (.ar)
-- Agregar la verificacion de la población (45.376.763)
-- Agregar un nuevo escenario con otro país a elección y verificar capital, colores de la bandera, dominio de internet y
-  población.
-***
+
 ## API Rest Countries
 https://restcountries.com/#endpoints-all
 
 ```bash
 curl --location 'https://restcountries.com/v3.1/translation/argentina?fields=capital,flags,tld,population'
 ```
+***
+
+## Práctica
+- Agregar la verificación del dominio de internet del ejemplo dado (.ar)
+- Agregar la verificacion de la población (45.376.763)
+- Agregar un nuevo escenario con otro país a elección y verificar capital, colores de la bandera, dominio de internet y
+  población.
 ***
 ## Dependencias
 - java 11

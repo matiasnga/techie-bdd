@@ -48,5 +48,5 @@ public class RestCountries {
         }
     }
 
-    //agregar metodos acá
+    //agregar métodos de verificación acá
 }
