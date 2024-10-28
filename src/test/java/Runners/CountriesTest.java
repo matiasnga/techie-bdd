@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/countries.feature",
-        glue = "StepDefinitions",
-        publish = true)
+        glue = "StepDefinitions")
 public class CountriesTest {
 }
 

@@ -31,7 +31,6 @@ public class RestCountries {
         String flagDescription = response.jsonPath().get("[0].flags.alt");
         countryDto.setCapital(capital.get(0));
         countryDto.setFlagDescription(flagDescription);
-        System.out.println(countryDto);
     }
 
     @Then("la capital debe ser {string}")
