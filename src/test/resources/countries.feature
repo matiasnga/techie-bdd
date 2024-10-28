@@ -5,5 +5,6 @@ Feature: Validación de información del país
     When obtengo los datos del país
     Then la capital debe ser "Buenos Aires"
     And la bandera debe tener los colores "White, Light Blue"
-#    And el dominio de internet debe ser ".ar"
-#    And la población debe ser 45376763 habitantes
+    #Agregar nuevas validaciones de dominio de internet y poblacion acá.
+
+  #Agregar escenario de un nuevo país acá.

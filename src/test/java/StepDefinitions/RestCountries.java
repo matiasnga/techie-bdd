@@ -9,7 +9,6 @@ import io.restassured.specification.RequestSpecification;
 import Dto.CountryDto;
 import org.junit.Assert;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class RestCountries {
@@ -43,10 +42,11 @@ public class RestCountries {
     @Then("la bandera debe tener los colores {string}")
     public void verificarBandera(String colores) {
         String[] coloresList = colores.toLowerCase().split(",\\s*");
-        System.out.println(Arrays.toString(coloresList));
         for (String color : coloresList) {
             Assert.assertTrue("El color \"" + color + "\" no se encuentra en la descripción de la bandera.",
                     countryDto.getFlagDescription().contains(color.toLowerCase()));
         }
     }
+
+    //agregar metodos acá
 }
