@@ -22,7 +22,6 @@ public class RestCountries {
         RestAssured.baseURI = uri;
         RequestSpecification request = RestAssured.given();
         response = request.get(country + fields);
-        System.out.println(response.getBody().asString());
     }
 
     @When("obtengo los datos del país")
