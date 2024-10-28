@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,8 +30,12 @@ public class RestCountries {
     public void mapearDatosDelPais() {
         List<String> capital = response.jsonPath().getList("[0].capital");
         String flagDescription = response.jsonPath().get("[0].flags.alt");
+        List<String> dominio = response.jsonPath().getList("[0].tld");
+        Integer population = response.jsonPath().get("[0].population");
         countryDto.setCapital(capital.get(0));
         countryDto.setFlagDescription(flagDescription);
+        countryDto.setDomain(dominio.get(0));
+        countryDto.setPopulation(population);
         System.out.println(countryDto);
     }
 
@@ -46,6 +51,18 @@ public class RestCountries {
             Assert.assertTrue("El color \"" + color + "\" no se encuentra en la descripción de la bandera.",
                     countryDto.getFlagDescription().contains(color.toLowerCase()));
         }
+    }
+
+    @And("el dominio de internet debe ser {string}")
+    public void elDominioDeInternetDebeSer(String dominio) {
+        Assert.assertEquals(dominio, countryDto.getDomain());
+
+    }
+
+    @And("la población debe ser {int}")
+    public void laPoblacionDebeSer(Integer population) {
+        Assert.assertEquals(population, countryDto.getPopulation());
+
     }
 
     //agregar métodos de verificación acá
