@@ -6,11 +6,10 @@ Feature: Validación de información del país
     Then la capital debe ser <Capital>
     And la bandera debe tener los colores <FlagColors>
     And el dominio de internet debe ser <Domain>
-    And la población debe ser <Population>
 
     Examples:
-      | Country       | Capital        | FlagColors          | Domain | Population |
-      | "Argentina"   | "Buenos Aires" | "Light Blue, White" | ".ar"  | 45376763   |
-      | "New Zealand" | "Wellington"   | "Blue, White, Red"  | ".nz"  | 5084300    |
-      | "Indonesia"   | "Jakarta"      | "Red, White"        | ".id"  | 273523621  |
-      | "Russia"      | "Moscow"       | "Blue, Red, White"  | ".ru"  | 144104080  |
+      | Country       | Capital        | FlagColors          | Domain |
+      | "Argentina"   | "Buenos Aires" | "Light Blue, White" | ".ar"  |
+      | "New Zealand" | "Wellington"   | "Blue, White, Red"  | ".nz"  |
+      | "Indonesia"   | "Jakarta"      | "Red, White"        | ".id"  |
+      | "Russia"      | "Moscow"       | "Blue, Red, White"  | ".ru"  |

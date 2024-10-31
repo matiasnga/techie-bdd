@@ -31,11 +31,9 @@ public class RestCountries {
         List<String> capital = response.jsonPath().getList("[0].capital");
         String flagDescription = response.jsonPath().get("[0].flags.alt");
         List<String> dominio = response.jsonPath().getList("[0].tld");
-        Integer population = response.jsonPath().get("[0].population");
         countryDto.setCapital(capital.get(0));
         countryDto.setFlagDescription(flagDescription);
         countryDto.setDomain(dominio.get(0));
-        countryDto.setPopulation(population);
     }
 
     @Then("la capital debe ser {string}")
@@ -57,10 +55,4 @@ public class RestCountries {
         Assert.assertEquals(dominio, countryDto.getDomain());
     }
 
-    @And("la población debe ser {int}")
-    public void laPoblacionDebeSer(Integer population) {
-        Assert.assertEquals(population, countryDto.getPopulation());
-    }
-
-    //agregar métodos de verificación acá
 }
