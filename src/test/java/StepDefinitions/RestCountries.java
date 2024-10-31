@@ -42,7 +42,7 @@ public class RestCountries {
     public void verificarBandera(String colores) {
         String[] coloresList = colores.toLowerCase().split(",\\s*");
         for (String color : coloresList) {
-            String regex = "\\b" + color + "\\b"; // \\b es un delimitador de palabra
+            String regex = "\\b" + color + "\\b";
             Assert.assertTrue("El color \"" + color + "\" no se encuentra en la descripción de la bandera.",
                     Pattern.compile(regex).matcher(countryDto.getFlagDescription()).find());
         }
