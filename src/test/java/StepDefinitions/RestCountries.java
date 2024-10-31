@@ -15,19 +15,20 @@ import java.util.regex.Pattern;
 
 public class RestCountries {
     private static final String uri = "https://restcountries.com/v3.1/name/";
-    private static final String fields = "?fields=name,capital,flags,tld,population";
+    private static final String fields = "?fields=name,capital,flags,tld";
     private static final CountryDto countryDto = new CountryDto();
     private static Response response;
 
-    @Given("el país {string}")
-    public void fetchDatosDelPaisDesdeLaApi(String country) {
+    @Given("la petición del país {string}")
+    public void fetch_datos_del_pais_desde_la_api(String country) {
         RestAssured.baseURI = uri;
         RequestSpecification request = RestAssured.given();
         response = request.get(country + fields);
     }
 
-    @When("obtengo los datos del país")
-    public void mapearDatosDelPais() {
+    @When("obtengo los datos del país con status {int}")
+    public void mapear_datos_del_pais(int statusCode) {
+        Assert.assertEquals(statusCode, response.getStatusCode());
         List<String> capital = response.jsonPath().getList("[0].capital");
         String flagDescription = response.jsonPath().get("[0].flags.alt");
         List<String> dominio = response.jsonPath().getList("[0].tld");
@@ -37,13 +38,13 @@ public class RestCountries {
     }
 
     @Then("la capital debe ser {string}")
-    public void verificarCapital(String capital) {
+    public void verificar_capital(String capital) {
         Assert.assertEquals(capital, countryDto.getCapital());
     }
 
     @Then("la bandera debe tener los colores {string}")
     public void verificarBandera(String colores) {
-        String[] coloresList = colores.toLowerCase().split(",\\s*");
+        String[] coloresList = colores.split(",\\s*");
         for (String color : coloresList) {
             String regex = "\\b" + color + "\\b"; // \\b es un delimitador de palabra
             Assert.assertTrue("El color \"" + color + "\" no se encuentra en la descripción de la bandera.",
