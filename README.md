@@ -29,16 +29,15 @@ En Gherkin, la estructura típica de los pasos utiliza las palabras clave en ing
 https://restcountries.com/#endpoints-all
 
 ```bash
-curl --location 'https://restcountries.com/v3.1/name/argentina?fields=capital,flags,tld,population'
+curl --location 'https://restcountries.com/v3.1/name/argentina?fields=capital,flags,tld'
 ```
 ***
 
 ## Práctica
+- Agregar lógica para verificar los colores de la bandera en la descripción de la bandera.
 - Agregar la verificación del dominio de internet del ejemplo dado (.ar)
-- Agregar la verificacion de la población (45.376.763)
-- Agregar un nuevo escenario con otro país a elección y verificar capital, colores de la bandera, dominio de internet y
-  población.
-- Activar la publicación del reporte del set de pruebas.
+- Agregar un nuevo escenario con otro país a elección y verificar capital, colores de la bandera y dominio de internet.
+- Generar un reporte del set de pruebas.
 
 ***
 ## Dependencias

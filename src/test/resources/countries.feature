@@ -4,7 +4,7 @@ Feature: Validación de información del país
     Given el país "Argentina"
     When obtengo los datos del país
     Then la capital debe ser "Buenos Aires"
-    And la bandera debe tener los colores "White, Light Blue"
+    And la bandera debe tener los colores "white, light blue"
     #Agregar nuevas validaciones de dominio de internet y poblacion acá.
 
 
