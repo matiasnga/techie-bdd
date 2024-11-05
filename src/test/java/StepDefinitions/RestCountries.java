@@ -44,7 +44,7 @@ public class RestCountries {
 
     @Then("la bandera debe tener los colores {string}")
     public void verificarBandera(String colores) {
-        String[] coloresList = colores.split(",\\s*");
+        String[] coloresList = colores.split(",");
         for (String color : coloresList) {
             String regex = "\\b" + color + "\\b"; // \\b es un delimitador de palabra
             Assert.assertTrue("El color \"" + color + "\" no se encuentra en la descripción de la bandera.",
