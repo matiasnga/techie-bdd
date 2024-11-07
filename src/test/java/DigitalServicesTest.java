@@ -3,9 +3,9 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/countries.feature",
+@CucumberOptions(features = "src/test/resources/digital_services.feature",
         glue = "StepDefinitions",
         publish = true)
-public class CountriesTest {
+public class DigitalServicesTest {
 }
 
