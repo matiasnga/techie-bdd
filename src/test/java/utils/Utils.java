@@ -10,10 +10,15 @@ import dto.MerchantDto;
 import dto.PaymentRequestDto;
 import dto.TaxpayerDto;
 import dto.TransactionDto;
+import lombok.SneakyThrows;
 
+import java.io.File;
+import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -53,4 +58,10 @@ public class Utils {
                 .create();
         return gson.toJson(perceptionRequestDto);
     }
+
+    @SneakyThrows
+    public String getContentFromFile(String filePath) {
+        return Files.readString(Paths.get(filePath));
+    }
+
 }

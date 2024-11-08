@@ -1,0 +1,52 @@
+{
+  "id": "2437ed05-0629-490a-a18e-8ce35eaaebff",
+  "externalId": "123e4567-e89b-12d3-a456-426614174000",
+  "date": "2021-05-10T11:59:11.332Z",
+  "taxpayer": {
+    "id": "27306981035",
+    "jurisdiction": 923
+  },
+  "transaction": {
+    "amountInArs": 10000,
+    "amountInUsd": 2,
+    "paymentMethod": "credit",
+    "currency": "ARS"
+  },
+  "merchant": {
+    "softDescriptor": "GOOGLE *YouTubeP P15kvqUY"
+  },
+  "perceptions": [
+    {
+      "id": "767",
+      "type": "EX",
+      "taxBase": 10000.00,
+      "taxRegimeCode": "199",
+      "rate": 0.00,
+      "amount": 0.00
+    },
+    {
+      "id": "217",
+      "type": "EX",
+      "taxBase": 10000.00,
+      "taxRegimeCode": "199",
+      "rate": 0.00,
+      "amount": 0.00
+    },
+    {
+      "id": "923",
+      "type": "EX",
+      "taxBase": 10000.00,
+      "taxRegimeCode": "199",
+      "rate": 0.00,
+      "amount": 0.00
+    },
+    {
+      "id": "939",
+      "type": "EX",
+      "taxBase": 10000.00,
+      "taxRegimeCode": "199",
+      "rate": 0.00,
+      "amount": 0.00
+    }
+  ]
+}
