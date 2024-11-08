@@ -50,9 +50,9 @@ public class DigitalServices {
                 .findFirst()
                 .orElse(null);
 
-        if (isNullGherkin(condition)) {
+        if (Objects.equals(condition, "-")) {
             Assert.assertNull(perceptionDto);
-        } else if (perceptionDto != null) {
+        } else {
             Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
             Assert.assertEquals(condition, perceptionDto.getType());
             Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
@@ -60,10 +60,4 @@ public class DigitalServices {
             Assert.assertEquals(new BigDecimal(perception).setScale(2, RoundingMode.HALF_UP), perceptionDto.getAmount());
         }
     }
-
-
-    private boolean isNullGherkin(String condition) {
-        return Objects.equals(condition, "-") ;
-    }
-
 }
