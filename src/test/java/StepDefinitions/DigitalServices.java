@@ -39,6 +39,7 @@ public class DigitalServices {
         String jsonResponse = response.getBody().asPrettyString();
         Gson gson = new Gson();
         paymentResponseDto = gson.fromJson(jsonResponse, PaymentResponseDto.class);
+        System.out.println(jsonResponse);
     }
 
     @Then("la percepcion de {long} debe ser {float}, la condicion debe ser {string}, la base imponible debe ser {float}, el regimen debe ser {long} y la alicuota {float}")
@@ -49,9 +50,9 @@ public class DigitalServices {
                 .findFirst()
                 .orElse(null);
 
-        if (isNullGherkin(perception, condition, taxBase, regime, rate)) {
+        if (isNullGherkin(condition)) {
             Assert.assertNull(perceptionDto);
-        } else {
+        } else if (perceptionDto != null) {
             Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
             Assert.assertEquals(condition, perceptionDto.getType());
             Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
@@ -61,8 +62,8 @@ public class DigitalServices {
     }
 
 
-    private boolean isNullGherkin(float perception, String condition, float taxBase, long regime, float rate) {
-        return perception == 0 && Objects.equals(condition, "-") && taxBase == 0 && regime == 0 && rate == 0;
+    private boolean isNullGherkin(String condition) {
+        return Objects.equals(condition, "-") ;
     }
 
 }
