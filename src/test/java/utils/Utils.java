@@ -30,9 +30,10 @@ import java.util.UUID;
 public class Utils {
 
     public String generateRequestJson(String date, long taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         PaymentRequestDto perceptionRequestDto = new PaymentRequestDto();
-        perceptionRequestDto.setDate(LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()));
+        perceptionRequestDto.setDate(LocalDateTime.parse(date, formatter));
         perceptionRequestDto.setExternalId(UUID.randomUUID().toString());
 
         TaxpayerDto taxpayerDto = new TaxpayerDto();
