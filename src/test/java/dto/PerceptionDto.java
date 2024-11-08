@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class PerceptionDto {
-    private String id;
+    private Long taxCode;
     private String type;
     private BigDecimal taxBase;
     private String taxRegimeCode;

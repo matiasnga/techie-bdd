@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class TaxpayerDto {
-    private String id;
+    private Long taxpayerId;
     private Long jurisdiction;
 }

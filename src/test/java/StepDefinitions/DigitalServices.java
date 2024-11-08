@@ -1,7 +1,6 @@
 package StepDefinitions;
 
 import com.google.gson.Gson;
-import dto.PaymentRequestDto;
 import dto.PaymentResponseDto;
 import dto.PerceptionDto;
 import io.cucumber.java.en.Given;
@@ -15,13 +14,15 @@ import utils.Utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 
 public class DigitalServices {
-    private static final String uri = "https://ssdd-dev.paygoal.io/";
-    private static final String path = "v1/perception";
+
+    public DigitalServices() {
+    }
+
+    private static final String uri = "https://digital-services-dev.paygoal.io/v1/perceptions";
     private static final Utils utils = new Utils();
     private static PaymentResponseDto paymentResponseDto;
     private static Response response;
@@ -29,38 +30,51 @@ public class DigitalServices {
     @Given("un payment con importe en dia {int} con taxpayerid {string} en jusrisdiccion {long} con monto en {string} con importe {float} y merchant {string}")
     public void generate_payment(int date, String taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
         String jsonRequest = utils.generateRequestJson(date, taxpayerId, jurisdiction, currency, amount, merchant);
-//        RestAssured.baseURI = uri;
-//        RequestSpecification request = RestAssured.given();
-//        request.header("Content-Type", "application/json");
-//        request.body(jsonRequest);
-//        response = request.post();
+        System.out.println(jsonRequest);
+
+        RestAssured.baseURI = uri;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.body(jsonRequest);
+        response = request.post();
+        System.out.println(response.getBody().asPrettyString());
     }
 
     @When("obtengo calculo con status {int}")
     public void response_perception(int statusCode) {
-//        Assert.assertEquals(response.getStatusCode(), statusCode);
-//        response.body().prettyPrint();
-//        Gson gson = new Gson();
-//        paymentResponseDto = gson.fromJson(response.body().prettyPrint(), PaymentResponseDto.class);
-    }
-
-    @Then("la percepcion de {string} debe ser {float}, la condicion debe ser {string}, la base imponible debe ser {float}, el regimen debe ser {string} y la alicuota {float}")
-    public void validate_taxes(String tax, float perception, String condition, float taxBase, String regime, float rate) {
-        String mockResponse = utils.getContentFromFile("src/test/resources/mock_response.json");
+        Assert.assertEquals(response.getStatusCode(), statusCode);
+        String jsonResponse = response.getBody().asPrettyString().replace("null ,", "");
         Gson gson = new Gson();
-        paymentResponseDto = gson.fromJson(mockResponse, PaymentResponseDto.class);
-        PerceptionDto perceptionDto = paymentResponseDto.getPerceptions().stream()
-                .filter(p -> p.getId().equals(tax))
+        paymentResponseDto = gson.fromJson(jsonResponse, PaymentResponseDto.class);
+    }
+
+    @Then("la percepcion de {int} debe ser {float}, la condicion debe ser {string}, la base imponible debe ser {float}, el regimen debe ser {string} y la alicuota {float}")
+    public void validate_taxes(int taxCode, float perception, String condition, float taxBase, String regime, float rate) {
+        PerceptionDto perceptionDto = paymentResponseDto.getPerceptions()
+                .stream()
+                .filter(p -> Objects.equals(p.getTaxCode(), Long.valueOf(taxCode)))
                 .findFirst()
-                .get();
+                .orElse(null);
 
-        Assert.assertEquals(new BigDecimal(perception).setScale(2, RoundingMode.HALF_UP), perceptionDto.getAmount());
-        Assert.assertEquals(condition, perceptionDto.getType());
-        Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
-        Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
-        Assert.assertEquals(new BigDecimal(rate).setScale(2, RoundingMode.HALF_UP), perceptionDto.getRate());
+        if (isNullGherkin(perception, condition, taxBase, regime, rate)) {
+            Assert.assertNull(perceptionDto);
+        }
 
+        if (perceptionDto != null) {
+            Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
+            Assert.assertEquals(condition, perceptionDto.getType());
+            Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
+            Assert.assertEquals(new BigDecimal(rate).setScale(4, RoundingMode.HALF_UP), perceptionDto.getRate());
+            Assert.assertEquals(new BigDecimal(perception).setScale(2, RoundingMode.HALF_UP), perceptionDto.getAmount());
+        }
 
     }
 
+    private boolean isNullGherkin(float perception, String condition, float taxBase, String regime, float rate) {
+        return perception == 0 && Objects.equals(condition, "-") && taxBase == 0 && Objects.equals(regime, "-") && rate == 0;
+    }
+
+    @Given("un payment con importe en dia <date> con taxpayerid <taxpayerId> en jusrisdiccion <jurisdiction> con monto en <currency> con importe <amount> y merchant <merchant>")
+    public void unPaymentConImporteEnDiaDateConTaxpayeridTaxpayerIdEnJusrisdiccionJurisdictionConMontoEnCurrencyConImporteAmountYMerchantMerchant() {
+    }
 }
