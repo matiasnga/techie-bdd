@@ -29,14 +29,14 @@ import java.util.UUID;
 
 public class Utils {
 
-    public String generateRequestJson(int date, String taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
+    public String generateRequestJson(String date, long taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
 
         PaymentRequestDto perceptionRequestDto = new PaymentRequestDto();
         perceptionRequestDto.setDate(LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()));
         perceptionRequestDto.setExternalId(UUID.randomUUID().toString());
 
         TaxpayerDto taxpayerDto = new TaxpayerDto();
-        taxpayerDto.setTaxpayerId(Long.valueOf(taxpayerId));
+        taxpayerDto.setTaxpayerId(taxpayerId);
         taxpayerDto.setJurisdiction(jurisdiction);
         perceptionRequestDto.setTaxpayer(taxpayerDto);
 

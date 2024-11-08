@@ -27,8 +27,8 @@ public class DigitalServices {
     private static PaymentResponseDto paymentResponseDto;
     private static Response response;
 
-    @Given("un payment con importe en dia {int} con taxpayerid {string} en jusrisdiccion {long} con monto en {string} con importe {float} y merchant {string}")
-    public void generate_payment(int date, String taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
+    @Given("un payment en dia {string} con taxpayerid {long} en jusrisdiccion {long} con monto en {string} con importe {float} y merchant {string}")
+    public void generate_payment(String date, long taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
         String jsonRequest = utils.generateRequestJson(date, taxpayerId, jurisdiction, currency, amount, merchant);
         System.out.println(jsonRequest);
 
@@ -48,8 +48,8 @@ public class DigitalServices {
         paymentResponseDto = gson.fromJson(jsonResponse, PaymentResponseDto.class);
     }
 
-    @Then("la percepcion de {int} debe ser {float}, la condicion debe ser {string}, la base imponible debe ser {float}, el regimen debe ser {string} y la alicuota {float}")
-    public void validate_taxes(int taxCode, float perception, String condition, float taxBase, String regime, float rate) {
+    @Then("la percepcion de {int} debe ser {float}, la condicion debe ser {string}, la base imponible debe ser {float}, el regimen debe ser {long} y la alicuota {float}")
+    public void validate_taxes(int taxCode, float perception, String condition, float taxBase, Long regime, float rate) {
         PerceptionDto perceptionDto = paymentResponseDto.getPerceptions()
                 .stream()
                 .filter(p -> Objects.equals(p.getTaxCode(), Long.valueOf(taxCode)))
@@ -70,11 +70,8 @@ public class DigitalServices {
 
     }
 
-    private boolean isNullGherkin(float perception, String condition, float taxBase, String regime, float rate) {
-        return perception == 0 && Objects.equals(condition, "-") && taxBase == 0 && Objects.equals(regime, "-") && rate == 0;
+    private boolean isNullGherkin(float perception, String condition, float taxBase, long regime, float rate) {
+        return perception == 0 && Objects.equals(condition, "-") && taxBase == 0 && regime == 0 && rate == 0;
     }
 
-    @Given("un payment con importe en dia <date> con taxpayerid <taxpayerId> en jusrisdiccion <jurisdiction> con monto en <currency> con importe <amount> y merchant <merchant>")
-    public void unPaymentConImporteEnDiaDateConTaxpayeridTaxpayerIdEnJusrisdiccionJurisdictionConMontoEnCurrencyConImporteAmountYMerchantMerchant() {
-    }
 }
