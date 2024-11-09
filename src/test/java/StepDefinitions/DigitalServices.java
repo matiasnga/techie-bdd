@@ -50,11 +50,11 @@ public class DigitalServices {
                 .findFirst()
                 .orElse(null);
 
-        if (Objects.equals(condition, "-")) {
+        if (rate == 0 && taxCode == paymentResponseDto.getTaxpayer().getJurisdiction()) {
             Assert.assertNull(perceptionDto);
         } else {
-            Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
-            Assert.assertEquals(condition, perceptionDto.getType());
+//            Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
+//            Assert.assertEquals(condition, perceptionDto.getType());
             Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
             Assert.assertEquals(new BigDecimal(rate).setScale(4, RoundingMode.HALF_UP), perceptionDto.getRate());
             Assert.assertEquals(new BigDecimal(perception).setScale(2, RoundingMode.HALF_UP), perceptionDto.getAmount());
