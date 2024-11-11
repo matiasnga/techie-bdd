@@ -43,7 +43,8 @@ public class DigitalServices {
     }
 
     @Then("la percepcion de {long} debe ser {float}, la condicion debe ser {string}, la base imponible debe ser {float}, el regimen debe ser {long} y la alicuota {float}")
-    public void validate_taxes(long taxCode, float perception, String condition, float taxBase, Long regime, float rate) {
+    public void validate_taxes(long tax, float perception, String condition, float taxBase, Long regime, float rate) {
+        long taxCode = utils.getTaxCode(tax);
         PerceptionDto perceptionDto = paymentResponseDto.getPerceptions()
                 .stream()
                 .filter(p -> Objects.equals(p.getTaxCode(), taxCode))
@@ -53,7 +54,7 @@ public class DigitalServices {
         if (rate == 0 && taxCode == paymentResponseDto.getTaxpayer().getJurisdiction()) {
             Assert.assertNull(perceptionDto);
         } else {
-//            Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
+            Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
 //            Assert.assertEquals(condition, perceptionDto.getType());
             Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
             Assert.assertEquals(new BigDecimal(rate).setScale(4, RoundingMode.HALF_UP), perceptionDto.getRate());

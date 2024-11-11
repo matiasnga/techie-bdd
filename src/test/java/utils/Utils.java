@@ -62,4 +62,13 @@ public class Utils {
         return gson.toJson(perceptionRequestDto);
     }
 
+    public long getTaxCode(long jurisdiction) {
+        if (jurisdiction == 915) {
+            return 5380;
+        } else {
+            return jurisdiction;
+        }
+    }
+
+
 }
