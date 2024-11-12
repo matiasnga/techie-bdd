@@ -26,6 +26,8 @@ public class DigitalServices {
     @Given("un payment en dia {string} con taxpayerid {long} en jusrisdiccion {long} con monto en {string} con importe {float} y merchant {string}")
     public void generate_payment(String date, long taxpayerId, long jurisdiction, String currency, float amount, String merchant) {
         String jsonRequest = utils.generateRequestJson(date, taxpayerId, jurisdiction, currency, amount, merchant);
+//        System.out.println(jsonRequest);
+
         RestAssured.baseURI = uri;
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -55,6 +57,7 @@ public class DigitalServices {
             Assert.assertNull(perceptionDto);
         } else {
             Assert.assertEquals(regime, perceptionDto.getTaxRegimeCode());
+
 //            Assert.assertEquals(condition, perceptionDto.getType());
             Assert.assertEquals(new BigDecimal(taxBase).setScale(2, RoundingMode.HALF_UP), perceptionDto.getTaxBase());
             Assert.assertEquals(new BigDecimal(rate).setScale(4, RoundingMode.HALF_UP), perceptionDto.getRate());
